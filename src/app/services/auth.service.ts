@@ -11,7 +11,8 @@ export class AuthService {
     private http: HttpClient,
   ) { }
  
-  private API_URL = 'http://localhost:8000/api/';
+  //private API_URL = 'http://localhost:8000/api/';
+  private API_URL = 'https://evening-depths-29423.herokuapp.com/api/';
 
   login(email: String, senha: String) {
     return new Promise((resolve, reject) => {
