@@ -1,10 +1,17 @@
-var express = require('express')
-var path = require('path')
-var serveStatic = require('serve-static')
+var express = require('express'),
+    app = express();
 
-var app = express()
-app.use(serveStatic(path.join(__dirname, 'dist')))
+app.use(express.static('www'));
 
-var port = process.env.PORT || 5000
-app.listen(port)
-console.log('server started ' + port)
+// CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
+app.set('port', process.env.PORT || 5000);
+
+app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+});
